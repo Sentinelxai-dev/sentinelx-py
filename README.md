@@ -79,7 +79,7 @@ The enforcement decision is made server-side. It cannot be bypassed client-side.
 except AdmissibilityError as e:
     e.verdict        # "INADMISSIBLE"
     e.constraint     # "AI_HUMAN_IN_LOOP_ENFORCED"
-    e.violation_code # "INV-046"
+    e.violation_code # e.g. "EXAMPLE-001"
     e.violations     # list of matched invariants
     e.summary        # "Action blocked: human oversight required before execution"
     e.receipt_hash   # sha256 sealed receipt
