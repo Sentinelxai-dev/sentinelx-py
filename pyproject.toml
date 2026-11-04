@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sentinelx-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pre-execution enforcement at the commit boundary"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -19,7 +19,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://sentinelx.ai"
-Repository = "https://github.com/xinfra-ai/sentinelx-py"
+Repository = "https://github.com/Sentinelxai-dev/sentinelx-py"
 
 [tool.setuptools.packages.find]
 where = ["."]

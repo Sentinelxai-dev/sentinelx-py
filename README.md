@@ -1,5 +1,7 @@
 # sentinelx-sdk
 
+> **Note:** SentinelX v3 is coming soon. This SDK continues to work with the current API at https://enforce.sentinelx.ai.
+
 Whether it's an AI agent, a bank transfer, or a power grid — execution is permanent.
 
 `sentinelx-sdk` enforces at the commit boundary. Before the action executes. Server-side. Unbypassable. Cryptographic receipt on every decision.
@@ -112,7 +114,7 @@ Or visit [sentinelx.ai](https://sentinelx.ai).
 - [sentinelx.ai](https://sentinelx.ai)
 - [enforce.sentinelx.ai](https://enforce.sentinelx.ai)
 - [@sentinelx/sdk on npm](https://npmjs.com/package/@sentinelx/sdk)
-- [sentinelx-go on GitHub](https://github.com/xinfra-ai/sentinelx-go)
+- [sentinelx-go on GitHub](https://github.com/Sentinelxai-dev/sentinelx-go)
 
 ## License
 
