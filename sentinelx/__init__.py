@@ -1,6 +1,6 @@
 """
 SentinelX Python SDK
-Pre-execution enforcement at the commit boundary.
+Pre-execution action checks at the commit boundary.
 https://sentinelx.ai
 """
 

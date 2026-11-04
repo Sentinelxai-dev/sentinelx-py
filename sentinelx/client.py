@@ -77,7 +77,7 @@ class AdmissibilityError(Exception):
 
 
 class SentinelX:
-    """SentinelX enforcement client."""
+    """SentinelX client."""
 
     def __init__(
         self,

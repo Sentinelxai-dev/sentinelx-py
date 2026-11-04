@@ -1,8 +1,8 @@
 # sentinelx-sdk
 
-Whether it's an AI agent, a bank transfer, or a power grid — execution is permanent.
+Whether it's an AI agent, a bank transfer, or a power grid, execution is permanent.
 
-`sentinelx-sdk` enforces at the commit boundary. Before the action executes. Server-side. Unbypassable. Cryptographic receipt on every decision.
+`sentinelx-sdk` checks actions at the commit boundary, before they execute. When placed in the commit path, decisions are made server-side and every decision returns a signed receipt.
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![python](https://img.shields.io/badge/python-3.9+-blue)](https://python.org)
@@ -36,7 +36,7 @@ except AdmissibilityError as e:
     print("Constraint:", e.constraint)
     print("Violations:", len(e.violations))
     print("Receipt hash:", e.receipt_hash)
-    # Action never executed. Receipt sealed.
+    # Action not committed (when placed in the commit path). Receipt returned.
 ```
 
 ## SCADA Example
@@ -55,7 +55,7 @@ receipt = sx.enforce("scada.setpoint.change", {
 print("ADMISSIBLE | Receipt:", receipt.receipt_hash)
 ```
 
-## Observe Mode — Never Throws
+## Observe Mode: never throws
 
 ```python
 # Always returns receipt. Never raises on INADMISSIBLE.
@@ -66,23 +66,23 @@ print(receipt.verdict)  # "ADMISSIBLE" or "INADMISSIBLE"
 
 ## How It Works
 
-SentinelX sits at the commit boundary between your system and execution. Before any irreversible action fires, the enforcement engine evaluates it against invariant constraints and returns a deterministic verdict with a provenance receipt.
+SentinelX sits at the commit boundary between your system and execution. Before an irreversible action is committed, the service evaluates it and returns a verdict with a receipt.
 
-- **ADMISSIBLE** → receipt returned, action may proceed
-- **INADMISSIBLE** → `AdmissibilityError` raised, nothing executes, receipt sealed
+- **ADMISSIBLE**: receipt returned, action may proceed
+- **INADMISSIBLE**: `AdmissibilityError` raised; when placed in the commit path, the action is not committed. Receipt returned.
 
-The enforcement decision is made server-side. It cannot be bypassed client-side.
+The commit decision is made server-side, not in the client library.
 
 ## AdmissibilityError
 
 ```python
 except AdmissibilityError as e:
     e.verdict        # "INADMISSIBLE"
-    e.constraint     # "AI_HUMAN_IN_LOOP_ENFORCED"
-    e.violation_code # "INV-046"
-    e.violations     # list of matched invariants
-    e.summary        # "Action blocked: human oversight required before execution"
-    e.receipt_hash   # sha256 sealed receipt
+    e.constraint     # reason identifier
+    e.violation_code # e.g. "EXAMPLE-001"
+    e.violations     # violation details
+    e.summary        # human-readable reason
+    e.receipt_hash   # receipt hash
     e.trace_id       # unique per evaluation
     e.receipt        # full Receipt object
 ```
@@ -117,3 +117,5 @@ Or visit [sentinelx.ai](https://sentinelx.ai).
 ## License
 
 Apache-2.0
+
+Patent pending. SentinelXAI, Inc.
